@@ -1,110 +1,23 @@
-import Header from "../components/Header";
 import Products from '../components/Products';
-import Footer from "../components/Footer";
-import CartSidebar from '../components/CartSidebar';
-import CheckoutModal from '../components/CheckoutModal';
-import OrderSuccessModal from '../components/OrderSuccessModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faCircleNotch, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Home({
 
     loading,
     error,
-
-    search,
-    setSearch,
-
-    cart,
-    totalItems,
-    cartTotal,
-
     filteredProducts,
-
-    isCartOpen,
-    openCart,
-    closeCart,
-
-    increaseQuantity,
-    decreaseQuantity,
-    removeFromCart,
-
-    openCheckout,
-
-    isCheckoutOpen,
-    closeCheckout,
-
-    checkoutData,
-    handleCheckoutChange,
-    isFormValid,
-    placeOrder,
-
-    checkoutItems,
-    checkoutTotal,
-    checkoutTotalItems,
-
-    isOrderSuccessOpen,
-    closeSuccessModal,
-    customerName,
-
+    cart,
     addToCart,
-    handleBuyNow,
-    handleCartBuyNow,
-
-    headerRef,
-    footerRef
+    handleBuyNow
 
 }) {
 
     return (
 
         <>
-            <Header
-                ref={headerRef}
-                search={search}
-                setSearch={setSearch}
-                cart={cart}
-                openCart={openCart}
-                totalItems={totalItems}
-            />
-
-            <CartSidebar 
-                cart={cart}
-                isCartOpen={isCartOpen}
-                closeCart={closeCart}
-                increaseQuantity={increaseQuantity}
-                decreaseQuantity={decreaseQuantity}
-                totalItems={totalItems}
-                cartTotal={cartTotal}
-                removeFromCart={removeFromCart}
-                openCheckout={openCheckout}
-                handleCartBuyNow={handleCartBuyNow}
-            />
-
-            <CheckoutModal
-                isCheckoutOpen={isCheckoutOpen}
-                closeCheckout={closeCheckout}
-                cart={cart}
-                totalItems={totalItems}
-                cartTotal={cartTotal}
-                checkoutData={checkoutData}
-                handleCheckoutChange={handleCheckoutChange}
-                isFormValid={isFormValid}
-                placeOrder={placeOrder}
-                checkoutItems={checkoutItems}
-                checkoutTotal={checkoutTotal}
-                checkoutTotalItems={checkoutTotalItems}
-            />
-
-
-            <OrderSuccessModal 
-                isOrderSuccessOpen={isOrderSuccessOpen}
-                closeSuccessModal={closeSuccessModal}
-                customerName={customerName}
-            />
-
             { loading ? (
 
                 <div className='loading'>
@@ -122,7 +35,30 @@ export default function Home({
                 </div>
 
             ) : error ? (
-                <h2 className="error">{error}</h2> 
+
+                <div className="error">    
+
+                    <div className="error-icon">
+                        <FontAwesomeIcon icon={faTriangleExclamation} />
+                    </div>
+
+                    <h2>Oops! We couldn't load the products.</h2>
+
+                    <p>
+                        Something went wrong while trying to load our products.
+                        Please check your internet connection and try again.
+                    </p>
+
+                    <button
+                        className="retryBtn"
+                        onClick={() => window.location.reload()}
+                    >
+                        Try Again
+                    </button>
+
+                </div>
+
+
             ) : (
                 <Products 
                 products={filteredProducts} 
@@ -131,8 +67,6 @@ export default function Home({
                 handleBuyNow={handleBuyNow}
                 />
             )}
-
-            <Footer ref={footerRef} />
         </>
 
     );

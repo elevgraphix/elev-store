@@ -1,3 +1,11 @@
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CartSidebar from './components/CartSidebar';
+import CheckoutModal from './components/CheckoutModal';
+import OrderSuccessModal from './components/OrderSuccessModal';
+
+
+
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 
@@ -8,7 +16,7 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import './App.css'
 
 
-const url = "https://dummyjson.com/products?limit=60&skip=20";
+const url = "https://dummyjson.com/products?limit=30&skip=50";
 
 function App() {
   
@@ -302,20 +310,19 @@ function App() {
       const response = await fetch(url);
 
       if (!response.ok) {
-        throw new Error("Unable to load products. Please try again later.")
+
+        throw new Error("Oops! We couldn't load the products.");
+
       }
 
       const data = await response.json();
       
       setProducts(data.products);
-      // console.log(data.products);
 
     } catch (err) {
 
-      console.error(err);
+      setError(err.message);
 
-      setError("Unable to load products. Please try again later.");
-      
     } finally {
 
       setLoading(false);
@@ -463,70 +470,88 @@ function App() {
 
 
   return (
-    <Routes>
 
-      <Route
-        path='/'
-        element={
+    <>
 
-          <Home
-      
-            loading={loading}
-            error={error}
-      
-            search={search}
-            setSearch={setSearch}
-      
-            cart={cart}
-            totalItems={totalItems}
-            cartTotal={cartTotal}
-      
-            filteredProducts={filteredProducts}
-      
-            isCartOpen={isCartOpen}
-            openCart={openCart}
-            closeCart={closeCart}
-      
-            increaseQuantity={increaseQuantity}
-            decreaseQuantity={decreaseQuantity}
-            removeFromCart={removeFromCart}
-      
-            openCheckout={openCheckout}
-      
-            isCheckoutOpen={isCheckoutOpen}
-            closeCheckout={closeCheckout}
-      
-            checkoutData={checkoutData}
-            handleCheckoutChange={handleCheckoutChange}
-            isFormValid={isFormValid}
-            placeOrder={placeOrder}
-      
-            checkoutItems={checkoutItems}
-            checkoutTotal={checkoutTotal}
-            checkoutTotalItems={checkoutTotalItems}
-      
-            isOrderSuccessOpen={isOrderSuccessOpen}
-            closeSuccessModal={closeSuccessModal}
-            customerName={customerName}
-      
-            addToCart={addToCart}
-            handleBuyNow={handleBuyNow}
-            handleCartBuyNow={handleCartBuyNow}
-      
-            headerRef={headerRef}
-            footerRef={footerRef}
-      
-          />
-
-        }
-      />
-        
-      <Route
-        path="/products/:id"
-        element={<ProductDetails />}
+      <Header
+        ref={headerRef}
+        search={search}
+        setSearch={setSearch}
+        cart={cart}
+        openCart={openCart}
+        totalItems={totalItems}
       />
 
-    </Routes>
+      <CartSidebar 
+        cart={cart}
+        isCartOpen={isCartOpen}
+        closeCart={closeCart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+        totalItems={totalItems}
+        cartTotal={cartTotal}
+        removeFromCart={removeFromCart}
+        openCheckout={openCheckout}
+        handleCartBuyNow={handleCartBuyNow}
+      />
+
+      <CheckoutModal
+        isCheckoutOpen={isCheckoutOpen}
+        closeCheckout={closeCheckout}
+        cart={cart}
+        totalItems={totalItems}
+        cartTotal={cartTotal}
+        checkoutData={checkoutData}
+        handleCheckoutChange={handleCheckoutChange}
+        isFormValid={isFormValid}
+        placeOrder={placeOrder}
+        checkoutItems={checkoutItems}
+        checkoutTotal={checkoutTotal}
+        checkoutTotalItems={checkoutTotalItems}
+      />
+
+
+      <OrderSuccessModal 
+        isOrderSuccessOpen={isOrderSuccessOpen}
+        closeSuccessModal={closeSuccessModal}
+        customerName={customerName}
+      />
+      
+
+      <Routes>
+
+        <Route
+          path='/'
+          element={
+
+            <Home
+              loading={loading}
+              error={error}
+              filteredProducts={filteredProducts}
+              cart={cart}
+              addToCart={addToCart}
+              handleBuyNow={handleBuyNow}
+            />
+
+          }
+        />
+          
+        <Route
+          path="/products/:id"
+          element={
+            <ProductDetails
+              addToCart={addToCart}
+              handleBuyNow={handleBuyNow}
+            />
+          }
+        />
+
+      </Routes>
+
+
+      <Footer ref={footerRef} />
+    </>
+
 
 );
 
