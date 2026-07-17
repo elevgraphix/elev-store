@@ -1,3 +1,5 @@
+import ProductCard from "../components/ProductCard";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
 
@@ -11,12 +13,13 @@ import {
 
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
 export default function ProductDetails({
 
+    cart,
     addToCart,
     handleBuyNow
 
@@ -37,6 +40,8 @@ export default function ProductDetails({
             : 0;
 
     const [quantity, setQuantity] = useState(1);
+
+    const [relatedProducts, setRelatedProducts] = useState([]);
 
     function increaseQuantity() {
         setQuantity(prev => prev + 1);
@@ -81,6 +86,51 @@ export default function ProductDetails({
 
     }, [id]);
 
+    
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }, [id]);
+
+
+    useEffect(() => {
+
+        if (!product) return;
+
+        async function getRelatedProducts() {
+
+            try {
+
+                const response = await fetch(
+                    `https://dummyjson.com/products/category/${product.category}`
+                );
+
+                if (!response.ok) {
+                    throw new Error();
+                }
+
+                const data = await response.json();
+
+                const filtered = data.products
+                    .filter(item => item.id !== product.id)
+                    .slice(0, 7);
+
+                setRelatedProducts(filtered);
+
+            } catch (err) {
+
+                console.error(err);
+
+            }
+
+        }
+
+        getRelatedProducts();
+
+    }, [product]);
+
 
     useEffect(() => {
 
@@ -103,13 +153,10 @@ export default function ProductDetails({
 
         <div className="product-details">
 
-            <button
-                className="backBtn"
-                onClick={() => navigate(-1)}
-            >
+            <Link to="/" className="backBtn">
                 <FontAwesomeIcon icon={faArrowLeft} />
                 <span>Continue Shopping</span>
-            </button>
+            </Link>
 
             <div className="product-details-container">
 
@@ -122,7 +169,7 @@ export default function ProductDetails({
 
                     <img
                         className="main-image"
-                        src={selectedImage}
+                        src={selectedImage || null}
                         alt={product.title}
                     />
 
@@ -404,7 +451,7 @@ export default function ProductDetails({
                 </h2>
                 
                 {product.reviews.length > 0? (
-                    
+
                     <div className="reviews-list">
 
                         {product.reviews.map((review) => (
@@ -449,9 +496,33 @@ export default function ProductDetails({
                     <p>No reviews yet</p>
                 )}
                 
-
             </section>
 
+            {/* Related Products */}
+
+            <div className="details-card related-products">
+
+                <h2 className="details-title">
+                    You may also like
+                </h2>
+
+                <div className="related-grid">
+
+                    {relatedProducts.map(item => (
+
+                        <ProductCard 
+                            key={item.id}
+                            cart={cart}
+                            product={item}
+                            addToCart={addToCart}
+                            handleBuyNow={handleBuyNow}
+                        />
+
+                    ))}
+
+                </div>
+
+            </div>
         </div>
     );
 }

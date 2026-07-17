@@ -1732,6 +1732,8 @@ body{
   
   background: #fff;
   color: var(--primary);
+
+  text-decoration: none;
   
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -2215,6 +2217,71 @@ body{
     line-height: 1.7;
 
 }
+
+
+/* ==========================
+   RELATED PRODUCTS
+========================== */
+
+.product-details .related-products {
+    margin-top: 2rem;
+}
+
+.product-details .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+    justify-content: center;
+    gap: 2rem;
+
+    margin-top: 2rem;
+}
+
+/* Make cards slightly smaller inside Product Details */
+.product-details .related-products .product-card {
+    height: 100%;
+    scale: .95;
+}
+
+.product-details .related-products .product-image {
+    height: 220px;
+    padding: 20px;
+}
+
+.product-details .related-products .product-info {
+    padding: 1.2rem;
+}
+
+.product-details .related-products .product-title {
+    font-size: 1.15rem;
+    margin-bottom: .8rem;
+}
+
+.product-details .related-products .product-category {
+    margin-bottom: 1rem;
+}
+
+.product-details .related-products .product-price {
+    font-size: 1.5rem;
+    margin-bottom: .8rem;
+}
+
+.product-details .related-products .product-description {
+    height: 55px;
+    font-size: .9rem;
+}
+
+.product-details .related-products .product-actions {
+    margin-top: 1.25rem;
+}
+
+@media (max-width: 768px) {
+
+    .product-details .related-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
 
 /* ---------- Purchase ---------- */
 

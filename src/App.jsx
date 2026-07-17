@@ -540,6 +540,7 @@ function App() {
           path="/products/:id"
           element={
             <ProductDetails
+              cart={cart}
               addToCart={addToCart}
               handleBuyNow={handleBuyNow}
             />
