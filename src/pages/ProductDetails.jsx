@@ -13,7 +13,7 @@ import {
 
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
@@ -26,13 +26,12 @@ export default function ProductDetails({
 }) {
 
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const [selectedImage, setSelectedImage] = useState("");
+    const [selectedImage, setSelectedImage] = useState(undefined);
 
     const originalPrice =
         product
@@ -86,7 +85,7 @@ export default function ProductDetails({
 
     }, [id]);
 
-    
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -169,7 +168,7 @@ export default function ProductDetails({
 
                     <img
                         className="main-image"
-                        src={selectedImage || null}
+                        src={selectedImage || undefined}
                         alt={product.title}
                     />
 
@@ -502,7 +501,7 @@ export default function ProductDetails({
 
             <div className="details-card related-products">
 
-                <h2 className="details-title">
+                <h2 className="details-title" id="details-title">
                     You may also like
                 </h2>
 

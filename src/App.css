@@ -2225,6 +2225,27 @@ body{
 
 .product-details .related-products {
     margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.related-products::after {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  background: var(--header-gradient);
+  height: 87px; 
+}
+
+.related-products .details-title {
+  z-index: 2;
+  position: absolute;
+  border-bottom: 0;
+  color: var(--surface);
 }
 
 .product-details .related-grid {
@@ -2233,7 +2254,7 @@ body{
     justify-content: center;
     gap: 2rem;
 
-    margin-top: 2rem;
+    margin-top: 5rem;
 }
 
 /* Make cards slightly smaller inside Product Details */
