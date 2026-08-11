@@ -553,8 +553,7 @@ function App() {
       <Footer ref={footerRef} />
     </>
 
-
-);
+  );
 
 }
 
