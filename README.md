@@ -2,6 +2,10 @@
 
 A modern e-commerce web application built with React and Vite.
 
+## Live Demo
+
+[View Elev Store Live](https://elev-store.vercel.app/)
+
 ## Overview
 
 Elev Store is a responsive e-commerce application that allows users to browse products, view detailed product information, add items to a shopping cart, and complete a simulated checkout process.
@@ -36,3 +40,4 @@ The project was built to practice and demonstrate modern React development, comp
 
 ```bash
 git clone https://github.com/elevgraphix/elev-store.git
+
