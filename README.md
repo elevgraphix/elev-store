@@ -1,17 +1,23 @@
 # Elev Store
 
-A modern e-commerce web application built with **React** and **Vite**.
+A modern e-commerce web application built with React and Vite.
+
+## Overview
+
+Elev Store is a responsive e-commerce application that allows users to browse products, view detailed product information, add items to a shopping cart, and complete a simulated checkout process.
+
+The project was built to practice and demonstrate modern React development, component-based architecture, client-side routing, state management, and persistent data using Local Storage.
 
 ## Features
 
 - Browse products
 - Search products instantly
-- Product Details page
-- Shopping Cart
+- View detailed product information
+- Add and remove products from the shopping cart
 - Buy Now functionality
 - Checkout system
-- Order Success modal
-- Persistent cart using Local Storage
+- Order success modal
+- Persistent shopping cart using Local Storage
 - Responsive design
 
 ## Built With
@@ -20,42 +26,13 @@ A modern e-commerce web application built with **React** and **Vite**.
 - Vite
 - JavaScript (ES6+)
 - CSS3
-- Font Awesome
 - React Router DOM
+- Font Awesome
+- SimpleBar React
 
-## Installation
+## Getting Started
 
-Clone the repository:
+### Clone the repository
 
 ```bash
 git clone https://github.com/elevgraphix/elev-store.git
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-## Folder Structure
-
-```
-src/
- ├── components/
- ├── pages/
- ├── App.jsx
- ├── main.jsx
-```
-
-## Author
-
-Joseph David
-
-GitHub:
-https://github.com/elevgraphix
