@@ -141,9 +141,17 @@ export default function ProductDetails({
 
 
     if (loading) {
-        return <h2>Loading product...</h2>
+        return (
+            <div className="loading">
+                <div className="loader">
+                    <span className="loader-dot"></span>
+                    <span className="loader-dot"></span>
+                    <span className="loader-dot"></span>
+                </div>
+            </div>
+        );
     }
-
+    
     if (error) {
         return <h2>{error}</h2>
     }

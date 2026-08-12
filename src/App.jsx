@@ -339,49 +339,41 @@ function App() {
 
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
 
     function handleScroll() {
-
       if (!headerRef.current) return;
-      
-      if (window.scrollY > 100) {
+
+      const currentScrollY = window.scrollY;
+
+      // Shrink header after scrolling down 100px
+      if (currentScrollY > 50) {
         headerRef.current.classList.add("active");
       } else {
         headerRef.current.classList.remove("active");
       }
+
+      // Hide header when scrolling down
+      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+        headerRef.current.classList.add("hidden");
+      }
+
+      // Show header when scrolling up
+      else if (currentScrollY < lastScrollY) {
+        headerRef.current.classList.remove("hidden");
+      }
+      
+      lastScrollY = currentScrollY;
     }
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-    }
+    };
 
   }, []);
 
-
-  useEffect(() => {
-
-    if (!headerRef.current || !footerRef.current) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-      
-      if(entries[0].isIntersecting && window.scrollY > 100) {
-        headerRef.current.style.opacity ="0";
-        headerRef.current.style.pointerEvents = "none";
-      } else {
-        headerRef.current.style.opacity = "1";
-        headerRef.current.style.pointerEvents = "auto";
-      }
-
-    });
-
-    observer.observe(footerRef.current);
-
-    return () => observer.disconnect();
-    
-  }, []);
-  
 
   useEffect(() => {
 

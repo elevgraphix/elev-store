@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-
-
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
+
 
 const Header = forwardRef(function Header(
     { 
@@ -15,10 +15,14 @@ const Header = forwardRef(function Header(
     ref
 ) {
 
+    
+
     return (
         <header ref={ref} className="header">
 
-            <h1 className="logo" onClick={() => (window.location = "http://localhost:5173")}>Elev Store</h1>
+            <Link to="/" className="logo">
+                Elev Store
+            </Link>
             
             <div className="header-right">
 

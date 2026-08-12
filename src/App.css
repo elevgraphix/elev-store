@@ -99,17 +99,28 @@ body{
     background-size: 300% 300%;
     animation: gradientMove 10s ease infinite;
 
-  transition:
-    padding .3s ease,
-    box-shadow .3s ease,
-    opacity .3s ease;
+    
+    opacity: 1;
+    transform: translateY(0px);
 
-    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    transition:
+      padding .3s ease,
+      box-shadow .3s ease,
+      opacity .3s ease-in-out,
+      transform .3s ease-in-out;
+
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
 }
 
 .header.active{
   padding: 16px 8%;
   box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+
+.header.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
 }
 
 @keyframes gradientMove{
@@ -126,7 +137,10 @@ body{
 
 .header .logo{
   font-size: 2rem;
+  font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .header-right {
@@ -1319,11 +1333,6 @@ body{
 }
 
 
-.hidden{
-  display: none
-}
-
-
 .product-buttons .cartBtn:not(:disabled):hover {
   background: var(--primary);
   color: white;
@@ -1338,17 +1347,21 @@ body{
 
 /* PRODUCTS GRID */
 .products{
-  width: min(1300px, 92%);
-  margin: 50px auto;
+  width: 100%;
+  margin: 30px auto;
+  padding: 0 10px;
+
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
-  gap: 30px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
 
 /* PRODUCT CARD */
 .product-card{
+  min-width: 0;
+  border-radius: 16px;
   background: rgba(255,255,255,.92);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,.5);
