@@ -91,7 +91,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 20px;
     padding: 24px 8%;
     color: #fff;
@@ -140,6 +140,7 @@ body{
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
+  text-wrap: nowrap;
   color: inherit;
 }
 
@@ -1615,6 +1616,7 @@ body{
   font-size: .8rem;
 
   color: #fff;
+  text-wrap: nowrap;
 
   display: flex;
   justify-content: center;
@@ -2588,13 +2590,15 @@ body{
 ========================== */
 
 @media(max-width:768px){
-  .header{
-    text-align: center;
-    justify-content: center
+  .header {
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      gap: 10px;
   }
 
-  .header input{
-    width:100%
+  .header input {
+      width: 100%;
+      min-width: 0;
   }
 
   .footer{
