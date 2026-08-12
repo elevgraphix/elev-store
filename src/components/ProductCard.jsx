@@ -61,9 +61,9 @@ export default function ProductCard({
                     ${product.price}
                 </p>
 
-                <p className="product-description">
+                {/* <p className="product-description">
                     {product.description}
-                </p>
+                </p> */}
 
                 
                 
