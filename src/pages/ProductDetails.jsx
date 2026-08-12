@@ -9,7 +9,8 @@ import {
     faBolt,
     faTruckFast,
     faRotateLeft,
-    faShieldHalved
+    faShieldHalved,
+    faTriangleExclamation
 
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -153,7 +154,29 @@ export default function ProductDetails({
     }
     
     if (error) {
-        return <h2>{error}</h2>
+        return  (
+            <div className="error">    
+
+                <div className="error-icon">
+                    <FontAwesomeIcon icon={faTriangleExclamation} />
+                </div>
+
+                <h2>Oops! We couldn't load your product</h2>
+
+                <p>
+                    Something went wrong while trying to load our products.
+                    Please check your internet connection and try again.
+                </p>
+
+                <button
+                    className="retryBtn"
+                    onClick={() => window.location.reload()}
+                >
+                    Try Again
+                </button>
+
+            </div>
+        )
     }
 
     return (

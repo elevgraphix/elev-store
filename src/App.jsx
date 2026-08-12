@@ -395,6 +395,23 @@ function App() {
 
   }, [isCartOpen]);
 
+  useEffect(() => {
+
+    if (!isCheckoutOpen) return;
+
+    function handleKeyD(event) {
+      if(event.key === "Escape") {
+        closeCheckout();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyD);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyD);
+    }
+
+  }, [isCheckoutOpen]);
 
   useEffect(() => {
 
